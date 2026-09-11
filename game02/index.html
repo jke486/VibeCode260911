@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sky Assault</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hud">
+        <div class="hud-item">
+          <span class="label">Score</span>
+          <span id="score">0</span>
+        </div>
+        <div class="hud-item">
+          <span class="label">Lives</span>
+          <span id="lives">3</span>
+        </div>
+        <div class="hud-item">
+          <span class="label">Level</span>
+          <span id="level">1</span>
+        </div>
+      </header>
+
+      <div class="game-shell">
+        <canvas id="gameCanvas" width="960" height="600"></canvas>
+
+        <div id="overlay" class="overlay visible">
+          <div class="panel">
+            <h1>Sky Assault</h1>
+            <p>좌우 이동: A / D 또는 ← / →</p>
+            <p>발사: Space</p>
+            <p>목표: 적을 막아 점수를 쌓으세요.</p>
+            <button id="startBtn">게임 시작</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

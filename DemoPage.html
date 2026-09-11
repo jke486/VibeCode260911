@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DemoPage</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --panel: #ffffff;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --accent: #10b981;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #dbe3ef;
+      --shadow: 0 12px 24px rgba(37, 99, 235, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #eef4ff, #f8fafc);
+      color: var(--text);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(8px);
+      padding: 18px 24px;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 16px;
+      z-index: 10;
+    }
+
+    .brand {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    nav {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    h1 {
+      margin: 36px 0 10px;
+      font-size: clamp(2rem, 4vw, 3.3rem);
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 28px;
+    }
+
+    .hero {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .hero h2 {
+      margin-top: 0;
+      font-size: 1.8rem;
+    }
+
+    .hero p {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .chip-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .chip {
+      background: #e0ecff;
+      color: var(--primary-dark);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-weight: 700;
+      font-size: 0.88rem;
+    }
+
+    .demo-box {
+      background: linear-gradient(135deg, #eff6ff, #ecfdf5);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      padding: 22px;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .code-preview {
+      background: #111827;
+      color: #d1fae5;
+      border-radius: 12px;
+      padding: 14px;
+      font-family: Consolas, monospace;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      overflow: auto;
+    }
+
+    .section {
+      margin-top: 40px;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      margin-bottom: 18px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .card p,
+    .card li {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .card ul {
+      padding-left: 20px;
+      margin-bottom: 0;
+    }
+
+    .examples {
+      margin-top: 30px;
+      background: var(--panel);
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+
+    .example-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-top: 20px;
+    }
+
+    .input-area {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      min-width: 180px;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-size: 1rem;
+    }
+
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      opacity: 0.96;
+    }
+
+    .primary-btn {
+      background: var(--primary);
+      color: white;
+    }
+
+    .secondary-btn {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .result {
+      margin-top: 16px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      min-height: 24px;
+    }
+
+    .counter {
+      margin-top: 18px;
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--accent);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      margin-top: 36px;
+      padding-bottom: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .example-grid,
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="topbar">
+      <div class="brand">DemoPage</div>
+      <nav>
+        <a href="#html">HTML</a>
+        <a href="#css">CSS</a>
+        <a href="#js">JavaScript</a>
+        <a href="#demo">실습</a>
+      </nav>
+    </header>
+
+    <h1>HTML5, CSS3, JavaScript 간단 학습</h1>
+    <p class="subtitle">
+      웹 페이지를 구성하는 기본 개념을 이해하고, 직접 예제를 만들어보며 공부해보세요.
+    </p>
+
+    <section class="hero">
+      <div>
+        <h2>웹 개발의 3대 요소</h2>
+        <p>
+          HTML은 구조를 만들고, CSS는 디자인을 꾸미며, JavaScript는 상호작용을 넣는 역할을 합니다.
+          이 페이지는 각 요소의 핵심 개념을 한눈에 볼 수 있도록 구성했습니다.
+        </p>
+        <div class="chip-group">
+          <span class="chip"># HTML5</span>
+          <span class="chip"># CSS3</span>
+          <span class="chip"># JavaScript</span>
+        </div>
+      </div>
+      <div class="demo-box">
+        <div class="code-preview">
+&lt;h1&gt;Hello, World!&lt;/h1&gt;
+&lt;button&gt;클릭&lt;/button&gt;
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="html">
+      <h2 class="section-title">1. HTML5</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>HTML이 하는 일</h3>
+          <p>
+            HTML은 웹 페이지의 내용을 구조화하는 언어입니다. 제목, 문단, 이미지, 링크, 버튼 등을 표현합니다.
+          </p>
+        </article>
+        <article class="card">
+          <h3>주요 요소</h3>
+          <ul>
+            <li>h1 ~ h6: 제목</li>
+            <li>p: 문단</li>
+            <li>button: 버튼</li>
+            <li>a: 링크</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>예시</h3>
+          <p>
+            웹 문서의 의미를 갖는 태그를 사용하면 브라우저와 검색 엔진이 내용을 더 잘 이해할 수 있습니다.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="css">
+      <h2 class="section-title">2. CSS3</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>CSS가 하는 일</h3>
+          <p>
+            CSS는 색상, 크기, 간격, 레이아웃, 애니메이션 등을 설정해 웹 페이지를 꾸며줍니다.
+          </p>
+        </article>
+        <article class="card">
+          <h3>핵심 개념</h3>
+          <ul>
+            <li>선택자: 어떤 요소를 꾸밀지 선택</li>
+            <li>속성: color, background, margin 등</li>
+            <li>레이아웃: flex, grid</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>예시</h3>
+          <p>
+            버튼에 색상, 둥근 모서리, 그림자 효과를 추가하면 더 보기 좋은 UI를 만들 수 있습니다.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="js">
+      <h2 class="section-title">3. JavaScript</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>JavaScript가 하는 일</h3>
+          <p>
+            JavaScript는 사용자와 상호작용하는 동작을 담당합니다. 클릭, 입력, 계산, 애니메이션 등을 구현합니다.
+          </p>
+        </article>
+        <article class="card">
+          <h3>기본 문법</h3>
+          <ul>
+            <li>변수: let, const</li>
+            <li>함수: 코드 재사용</li>
+            <li>이벤트: click, input 등</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>실전 팁</h3>
+          <p>
+            DOM을 다루며 button을 눌렀을 때 텍스트를 바꾸거나 값을 계산하는 방식으로 프로그램을 만들 수 있습니다.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="examples" id="demo">
+      <h2 class="section-title">실습 예제</h2>
+      <div class="example-grid">
+        <div>
+          <h3>1) 인사 메시지 출력</h3>
+          <p>이름을 입력하고 버튼을 누르면 JavaScript가 반응합니다.</p>
+          <div class="input-area">
+            <input id="nameInput" type="text" placeholder="이름을 입력하세요" />
+            <button class="primary-btn" id="greetBtn">반갑게 인사하기</button>
+          </div>
+          <div id="greetResult" class="result">결과가 여기에 표시됩니다.</div>
+        </div>
+
+        <div>
+          <h3>2) 간단한 카운터</h3>
+          <p>버튼을 눌러 숫자를 증가시키는 예제입니다.</p>
+          <div class="input-area">
+            <button class="secondary-btn" id="minusBtn">-1</button>
+            <button class="primary-btn" id="plusBtn">+1</button>
+          </div>
+          <div id="counter" class="counter">0</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      DemoPage • HTML5, CSS3, JavaScript 공부용 예제 페이지
+    </footer>
+  </div>
+
+  <script>
+    const nameInput = document.getElementById('nameInput');
+    const greetBtn = document.getElementById('greetBtn');
+    const greetResult = document.getElementById('greetResult');
+    const plusBtn = document.getElementById('plusBtn');
+    const minusBtn = document.getElementById('minusBtn');
+    const counter = document.getElementById('counter');
+
+    let count = 0;
+
+    greetBtn.addEventListener('click', () => {
+      const name = nameInput.value.trim();
+
+      if (name === '') {
+        greetResult.textContent = '이름을 입력해 주세요!';
+        return;
+      }
+
+      greetResult.textContent = `${name}님, 환영합니다! JavaScript 실습에 성공했어요.`;
+    });
+
+    plusBtn.addEventListener('click', () => {
+      count += 1;
+      counter.textContent = count;
+    });
+
+    minusBtn.addEventListener('click', () => {
+      count -= 1;
+      counter.textContent = count;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>테트리스</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <h1>테트리스</h1>
+
+        <div class="stats">
+          <div class="stat-box">
+            <span>점수</span>
+            <strong id="score">0</strong>
+          </div>
+          <div class="stat-box">
+            <span>라인</span>
+            <strong id="lines">0</strong>
+          </div>
+          <div class="stat-box">
+            <span>레벨</span>
+            <strong id="level">1</strong>
+          </div>
+        </div>
+
+        <div class="controls">
+          <div class="level-picker">
+            <label for="level-select">레벨 선택</label>
+            <select id="level-select">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select>
+          </div>
+
+          <button id="start-btn" type="button">게임 시작</button>
+          <button id="pause-btn" type="button">일시정지</button>
+          <button id="restart-btn" type="button">다시 시작</button>
+        </div>
+
+        <div class="preview-box">
+          <h2>다음 블록</h2>
+          <canvas id="next" width="150" height="150"></canvas>
+        </div>
+      </aside>
+
+      <main class="game-panel">
+        <canvas id="board" width="300" height="600" aria-label="테트리스 게임 보드"></canvas>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
